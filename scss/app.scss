@@ -159,3 +159,77 @@ $font-sizes-map: (
 // SASS sa utilizzare anche operatori logici, di comparazione e numerici
 // == != < > <= >=
 // + - * /
+
+// 6) MIXINS
+// un MIXIN è un blocco di regole CSS richiamabili con un singolo "nome"
+
+$normal-padding: 5px 10px;
+$spotify-color: rgb(118, 239, 118);
+
+@mixin buttonsStyles {
+  color: $spotify-color;
+  background-color: black;
+  padding: $normal-padding;
+}
+
+// come utilizziamo questo mixin, questo blocco di regole?
+// nei vostri selettori
+
+button.spotify-button {
+  // richiamate le regole del mixin buttonsStyles con la direttiva "include"
+  @include buttonsStyles; // in un colpo solo abbiamo riempito questo selettore
+  // con 3 regole CSS
+}
+
+// un mixin è "come una funzione" in JS: vi permette in un colpo solo di richiamare
+// un elenco di proprietà (istruzioni) in un colpo solo grazie al loro nome
+
+// è possibile prevedere in un mixin l'arrivo di parametri, in modo da "personalizzare" ogni invocazione
+// è possibile creare mixin con un numero infinito di parametri
+// è anche possibile dare un valore di default ai parametri grazie ai :
+@mixin customStyles($custom-background-color, $corinne: white) {
+  margin-top: 10px;
+  padding-left: 5px;
+  border: 2px solid $spotify-color;
+  background-color: $custom-background-color;
+}
+
+article.custom {
+  @include customStyles(rgb(50, 50, 200));
+  // risultato di questa invocazione del mixin customStyles()
+  // margin-top: 10px;
+  // padding-left: 5px;
+  // border: 2px solid rgb(118, 239, 118);
+  // background-color: rgb(50, 50, 200)
+}
+
+section.custom {
+  @include customStyles(rgb(200, 50, 50));
+  // risultato di questa invocazione del mixin customStyles()
+  // margin-top: 10px;
+  // padding-left: 5px;
+  // border: 2px solid rgb(118, 239, 118);
+  // background-color: rgb(200, 50, 50);
+}
+
+// 6) INTERPOLAZIONE
+
+@mixin fontInterpolation($property, $value) {
+  // questo mixin concatenerà la parola "font-" al valore di $property, e le assegnerà il $value
+  font-#{$property}: $value;
+}
+
+.element1 {
+  @include fontInterpolation('size', 24px);
+  // font-size: 24px;
+}
+
+.element2 {
+  @include fontInterpolation('weight', 600);
+  // font-weight: 600
+}
+
+.element3 {
+  @include fontInterpolation('family', 'Arial');
+  // font-family: 'Arial'
+}
