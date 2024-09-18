@@ -1,0 +1,161 @@
+// il nostro primo file scss!
+// i file scss sono 100% compatibili con la normale sintassi css
+h1 {
+  color: red;
+}
+
+p {
+  color: darkgreen;
+  font-size: 2em;
+  border: 1px solid black;
+}
+
+// cosa si può fare di "nuovo" in scss?
+// FEATURES DI SCSS
+// 1) si può utilizzare anche per scrivere del normalissimo CSS
+// 2) SELETTORI ANNIDATI/NIDIFICATI
+
+// nav {
+//   display: block;
+// }
+
+// nav ul {
+//   display: flex;
+//   flex-direction: column;
+// }
+
+// @media screen and (min-width: 768px) {
+//   nav ul {
+//     flex-direction: row;
+//   }
+// }
+
+nav {
+  display: block;
+  ul {
+    display: flex;
+    flex-direction: column;
+    @media screen and (min-width: 768px) {
+      flex-direction: row;
+    }
+  }
+}
+
+// 3) LAVORARE MEGLIO CON LE PSEUDOCLASSI
+
+// la & è un modo per "riutilizzare" il selettore raggiunto al fine di usare
+// comodamente e in modo annidato una pseudo classe (o uno pseudo elemento)
+
+.buttons {
+  // tip from Adriana: così selezioniamo l'hover sul tag ".buttons" e
+  // condizioniamo entrambi i bottoni contenuti allo stesso momento
+  //   &:hover {
+  //     .primary {
+  //       transform: scale(1.1);
+  //     }
+  //     .secondary {
+  //       transform: scale(0.9);
+  //     }
+  //   }
+  margin-bottom: 10rem;
+  .primary {
+    width: 150px;
+    border: 1px solid darkcyan;
+    background-color: aqua;
+    border-radius: 5px;
+    // & in questo caso è la classe "primary" dentro la classe "buttons"
+    &:hover {
+      transform: scale(1.1);
+    }
+    // anche pseudo-elementi
+    // &::after {
+
+    // }
+    // &::before {
+
+    // }
+  }
+  .secondary {
+    width: 150px;
+    border: 1px solid darkgoldenrod;
+    background-color: orange;
+    border-radius: 30px;
+    &:hover {
+      transform: scale(0.9);
+    }
+  }
+}
+
+// .buttons .primary:hover {
+//   transform: scale(1.1);
+// }
+// .buttons .secondary:hover {
+//   transform: scale(0.9);
+// }
+
+// 4) UTILIZZARE UN PREFISSO COMUNE PER PROPRIETÀ "SIMILI"
+// p.main-paragraph {
+//   font-size: 1.2em;
+//   font-weight: 500;
+//   font-style: italic;
+//   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+// }
+
+p.main-paragraph {
+  font: {
+    size: 1.2em;
+    weight: 500;
+    style: italic;
+    family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+}
+
+// 5) VARIABILI
+// le variabili in SASS servono per memorizzare dei valori.
+// i valori che salviamo potranno venire riutilizzati nelle regole di stile che scriveremo
+// concettualmente, in SASS le variabili sono più simili alle costanti (raramente vengono ri-assegnate)
+
+// cosa possiamo salvare in una variabile SASS? quali sono i ""tipi"" in SASS?
+// - valori numerici (1, 50, 100px, 2rem, 5% etc.)
+// - stringhe ('hello', "ciao")
+// - colori (red, blue, #ffcc00, rgb(25,255,5))
+// - booleani (true/false)
+// - null
+// - valori combinati per proprietà "shortcut" (1px solid black, 5px 8px 10px 8px)
+// - liste di valori (10px, 16px, 24px) -> un po' come gli array in JS
+// - mappe di coppie chiave/valore -> un po' come gli oggetti in JS
+
+// la creazione di una variabile in SASS viene fatta con l'operatore $
+// es.
+$main-margin: 35px; // d'ora in poi posso riutilizzare questa quantità di px
+// semplicemente utilizzando il suo nome, $main-margin
+// utile se la andrò a riutilizzare più volte
+
+div.main {
+  margin-left: $main-margin; // 35px
+}
+
+nav ul {
+  margin-top: $main-margin;
+}
+
+$primary-color: rgb(20, 122, 136);
+$main-border-style: 2px solid $primary-color;
+
+body {
+  border: $main-border-style;
+}
+
+$sizes-list: '16px', '24px', '32px';
+
+$font-sizes-map: (
+  xs: 10px,
+  sm: 12px,
+  md: 15px,
+  lg: 18px,
+  xl: 24px,
+);
+
+// SASS sa utilizzare anche operatori logici, di comparazione e numerici
+// == != < > <= >=
+// + - * /
