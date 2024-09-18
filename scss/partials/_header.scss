@@ -1,0 +1,20 @@
+// qui metto gli stili per l'h1, la nav etc.
+h1 {
+  text-align: center;
+  color: $primary-color;
+}
+
+nav {
+  border: 1px solid black;
+  ul {
+    display: flex;
+    flex-direction: column;
+    @media screen and (min-width: 350px) {
+      // stili non più mobile
+      flex-direction: row;
+    }
+    li {
+      margin: 0px 5px;
+    }
+  }
+}

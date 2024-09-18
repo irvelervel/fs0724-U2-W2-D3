@@ -1,0 +1,43 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  color: darkmagenta;
+}
+
+nav {
+  border: 1px solid black;
+}
+nav ul {
+  display: flex;
+  flex-direction: column;
+}
+@media screen and (min-width: 350px) {
+  nav ul {
+    flex-direction: row;
+  }
+}
+nav ul li {
+  margin: 0px 5px;
+}
+
+section {
+  font-size: 1.1em;
+}
+section p {
+  color: darkmagenta;
+}
+
+footer {
+  height: 30%;
+}/*# sourceMappingURL=style.css.map */

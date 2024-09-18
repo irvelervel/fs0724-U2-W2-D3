@@ -233,3 +233,62 @@ section.custom {
   @include fontInterpolation('family', 'Arial');
   // font-family: 'Arial'
 }
+
+// 7) C I C L I
+// in SASS è possibile ciclare delle liste o delle mappe per automatizzare
+// la generazione di stili, ma anche di vere e proprie CLASSI
+
+// creiamo una lista
+$my-sizes: 10px, 14px, 18px;
+
+// cicliamo questa lista: in SASS si utilizza una direttiva chiamata @each
+@each $size in $my-sizes {
+  // tutto il codice che inserite qui dentro verrà eseguito PER OGNI valore
+  // di $size
+  .text-#{$size} {
+    font-size: $size;
+  }
+}
+// ho appena generato 3 classi: .text-10px, .text-14px e infine .text-18px
+
+// come eliminiamo il "px" alla fine del nome della classe? con una mappa!
+$my-sizes-map: (
+  'extrasmall': 10px,
+  'small': 14px,
+  'medium': 18px,
+);
+
+@each $size, $value in $my-sizes-map {
+  // tutto il codice che inserite qui dentro verrà eseguito PER OGNI valore
+  // di $size
+  .text-#{$size} {
+    font-size: $value;
+  }
+}
+
+// 8) IF/ELSE
+// in SASS è possibile utilizzare delle direttive condizionali al fine di prendere
+// delle decisioni relativamente al valore di una variabile, al confronto di variabili etc.
+
+@mixin generate-margin-or-not($value: none) {
+  @if $value {
+    margin-top: $value;
+  } @else {
+  }
+}
+
+.my-margin {
+  @include generate-margin-or-not(15px);
+}
+
+.no-margin {
+  @include generate-margin-or-not();
+  // viene addirittura IGNORATA da sass, perchè è vuota
+}
+
+// 9) PARTIALS
+// SASS ci permette di lavorare su singoli, piccoli files che possono occuparsi
+// di specifiche porzioni di stili; questo rende il lavoro più modulare e più
+// mantenibile
+
+// passiamo a style.scss

@@ -1,0 +1,11 @@
+// qui dentro, nel file che verrà compilato, importerò TUTTI i file "partials"
+// che scriverò separatamente
+@import './partials/reset';
+@import './partials/variables';
+@import './partials/mixins';
+@import './partials/header';
+@import './partials/main';
+@import './partials/footer';
+
+// gli import NON utilizzano l'underscore nel nome del partial!
+// questo file non dovrebbe contenere nessuna regola
